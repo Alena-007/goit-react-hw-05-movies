@@ -6,7 +6,7 @@ export const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getTrendingMovies(1).then(movies => {
+    getTrendingMovies().then(movies => {
       setMovies(movies);
     });
   }, []);

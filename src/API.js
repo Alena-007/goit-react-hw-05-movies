@@ -5,16 +5,14 @@ const TRENDING_URL = `${BASE_URL}/trending/movie/week`;
 const SEARCH_URL = `${BASE_URL}/search/movie`;
 const MOVIE_ID_URL = `${BASE_URL}/movie/`;
 
-export const getTrendingMovies = page => {
-  return fetch(`${TRENDING_URL}?api_key=${API_KEY_THEMOVIEDB}&page=${page}`)
+export const getTrendingMovies = () => {
+  return fetch(`${TRENDING_URL}?api_key=${API_KEY_THEMOVIEDB}`)
     .then(respons => respons.json())
     .then(data => data.results);
 };
 
-export const getSearchMovies = (query, page) => {
-  return fetch(
-    `${SEARCH_URL}?api_key=${API_KEY_THEMOVIEDB}&query=${query}&page=${page}`
-  )
+export const getSearchMovies = request => {
+  return fetch(`${SEARCH_URL}?api_key=${API_KEY_THEMOVIEDB}&query=${request}`)
     .then(respons => respons.json())
     .then(data => data.results);
 };
