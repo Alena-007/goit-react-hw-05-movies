@@ -42,7 +42,7 @@ export const Movies = () => {
       <Searchbar onSubmit={handleFormSubmit} />
       {error && toast.error(error)}
       {movies.length > 0 && <MoviesList movies={movies} />}
-      <ToastContainer autoClose={3000} theme="dark" />
+      <ToastContainer autoClose={3000} theme="colored" />
     </main>
   );
 };

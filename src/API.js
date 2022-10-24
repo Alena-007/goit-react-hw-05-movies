@@ -18,15 +18,15 @@ export const getSearchMovies = request => {
 };
 
 export const getMovieById = id => {
-  return fetch(`${MOVIE_ID_URL}${id}?api_key=${API_KEY_THEMOVIEDB}`)
-    .then(respons => respons.json())
-    .then(data => data.results);
+  return fetch(`${MOVIE_ID_URL}${id}?api_key=${API_KEY_THEMOVIEDB}`).then(
+    respons => respons.json()
+  );
 };
 
 export const getMovieCast = id => {
-  return fetch(`${MOVIE_ID_URL}${id}/credits?api_key=${API_KEY_THEMOVIEDB}`)
-    .then(respons => respons.json())
-    .then(data => data.results);
+  return fetch(
+    `${MOVIE_ID_URL}${id}/credits?api_key=${API_KEY_THEMOVIEDB}`
+  ).then(respons => respons.json());
 };
 
 export const getMovieReviews = id => {
