@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieById } from '../API';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ export const MovieDetails = () => {
   if (!movieById) return null;
 
   return (
-    <main>
+    <div>
       {error && toast.error(error)}
       <div>
         <img
@@ -38,10 +38,15 @@ export const MovieDetails = () => {
       <div>
         <h4>Additional information</h4>
         <ul>
-          <li>Cast</li>
-          <li>Rewiews</li>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
         </ul>
       </div>
-    </main>
+      <Outlet />
+    </div>
   );
 };
