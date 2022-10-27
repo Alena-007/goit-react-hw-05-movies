@@ -6,7 +6,7 @@ import { getSearchMovies } from 'API';
 import { Searchbar } from 'components/Searchbar';
 import { MoviesList } from 'components/MoviesList';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -46,3 +46,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;

@@ -1,10 +1,10 @@
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { getMovieById } from '../API';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieById, setMovieById] = useState(null);
   const [error, setError] = useState(null);
@@ -49,7 +49,11 @@ export const MovieDetails = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={null}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };
+
+export default MovieDetails;
