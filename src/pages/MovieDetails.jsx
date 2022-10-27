@@ -1,4 +1,4 @@
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieById } from '../API';
 import { toast } from 'react-toastify';
@@ -8,6 +8,8 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movieById, setMovieById] = useState(null);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const goBackLinkHref = location.state?.from ?? '/movies';
 
   useEffect(() => {
     getMovieById(movieId)
@@ -20,6 +22,7 @@ export const MovieDetails = () => {
   return (
     <div>
       {error && toast.error(error)}
+      <Link to={goBackLinkHref}>Go back to movies</Link>
       <div>
         <img
           src={`https://www.themoviedb.org/t/p/w500${movieById.poster_path}`}
