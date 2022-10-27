@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieReviews } from '../API';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -15,9 +13,11 @@ export const Reviews = () => {
       .catch(error => setError(error.message));
   }, [movieId]);
 
+  const isReviews = reviews.length === 0 || error;
+
   return (
     <div>
-      {error && toast.error(error)};
+      {isReviews && <p>We don't have any reviews for this movie</p>}
       <ul>
         {reviews.map(review => (
           <li key={review.id}>

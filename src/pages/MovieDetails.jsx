@@ -22,7 +22,7 @@ const MovieDetails = () => {
   return (
     <div>
       {error && toast.error(error)}
-      <Link to={goBackLinkHref}>Go back to movies</Link>
+      <Link to={goBackLinkHref}>Go back</Link>
       <div>
         <img
           src={`https://www.themoviedb.org/t/p/w500${movieById.poster_path}`}
@@ -42,10 +42,14 @@ const MovieDetails = () => {
         <h4>Additional information</h4>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <Link to="cast" state={{ from: goBackLinkHref }}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to="reviews">Reviews</Link>
+            <Link to="reviews" state={{ from: goBackLinkHref }}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </div>

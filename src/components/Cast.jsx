@@ -1,8 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieCast } from '../API';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -15,9 +13,11 @@ export const Cast = () => {
       .catch(error => setError(error.message));
   }, [movieId]);
 
+  const isCast = cast.length === 0 || error;
+
   return (
     <div>
-      {error && toast.error(error)};
+      {isCast && <p>We don't have any actors information for this movie</p>}
       <ul>
         {cast.map(actor => (
           <li key={actor.id}>
