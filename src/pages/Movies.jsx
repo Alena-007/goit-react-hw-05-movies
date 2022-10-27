@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getSearchMovies } from 'API';
@@ -6,9 +7,10 @@ import { Searchbar } from 'components/Searchbar';
 import { MoviesList } from 'components/MoviesList';
 
 export const Movies = () => {
-  const [request, setRequest] = useState('');
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const request = searchParams.get('query') ?? '';
 
   useEffect(() => {
     if (request === '') {
@@ -27,19 +29,17 @@ export const Movies = () => {
       .catch(error => setError(error.message));
   }, [request]);
 
-  const handleFormSubmit = searchMovie => {
-    if (request === searchMovie) {
+  const handleFormSubmit = value => {
+    if (request === value) {
       return;
-    } else {
-      setRequest(searchMovie);
-      setMovies([]);
     }
+    setSearchParams(value !== '' ? { query: value } : {});
   };
 
   return (
     <main>
       <h1>Movies page</h1>
-      <Searchbar onSubmit={handleFormSubmit} />
+      <Searchbar onSubmit={handleFormSubmit} value={request} />
       {error && toast.error(error)}
       {movies.length > 0 && <MoviesList movies={movies} />}
       <ToastContainer autoClose={3000} theme="colored" />

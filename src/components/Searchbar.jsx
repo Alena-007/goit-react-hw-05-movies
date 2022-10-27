@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-export const Searchbar = ({ onSubmit }) => {
-  const [request, setRequest] = useState('');
+export const Searchbar = ({ onSubmit, value }) => {
+  const [request, setRequest] = useState(value);
 
   const handleChange = e => {
     setRequest(e.target.value.toLowerCase());
@@ -15,6 +15,7 @@ export const Searchbar = ({ onSubmit }) => {
     }
 
     onSubmit(request);
+    setRequest(request);
   };
 
   return (
