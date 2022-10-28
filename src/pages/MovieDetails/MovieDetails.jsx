@@ -1,8 +1,10 @@
-import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect, Suspense } from 'react';
-import { getMovieById } from '../API';
+import { getMovieById } from '../../API';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Box } from 'components/Box';
+import { StyledLink, Link } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -20,27 +22,46 @@ const MovieDetails = () => {
   if (!movieById) return null;
 
   return (
-    <div>
+    <Box width="1200px" ml="auto" mr="auto" as="main" p={4}>
       {error && toast.error(error)}
-      <Link to={goBackLinkHref}>Go back</Link>
-      <div>
+      <StyledLink to={goBackLinkHref}>Go back</StyledLink>
+      <Box
+        as="section"
+        mb={4}
+        display="flex"
+        justifyContent="center"
+        gridGap={5}
+        borderBottom="normal"
+      >
         <img
           src={`https://www.themoviedb.org/t/p/w500${movieById.poster_path}`}
           alt={movieById.title}
-          width="300"
+          width="256"
         />
         <div>
-          <h1>{movieById.title}</h1>
-          <p>User Score: {(movieById.vote_average * 10).toFixed(0)} %</p>
-          <h2>Overview</h2>
-          <p>{movieById.overview}</p>
-          <h3>Overview</h3>
+          <Box as="h1" mb={3} color="#4B0082" borderBottom="normal">
+            {movieById.title}
+          </Box>
+          <Box as="p" mb={4}>
+            User Score: {(movieById.vote_average * 10).toFixed(0)} %
+          </Box>
+          <Box as="h2" mb={3}>
+            Overview
+          </Box>
+          <Box as="p" mb={5}>
+            {movieById.overview}
+          </Box>
+          <Box as="h3" mb={3}>
+            Genres
+          </Box>
           <p>{movieById.genres.map(genre => genre.name).join(', ')}</p>
         </div>
-      </div>
-      <div>
-        <h4>Additional information</h4>
-        <ul>
+      </Box>
+      <Box as="section" borderBottom="normal">
+        <Box as="h3" mb={3}>
+          Additional information
+        </Box>
+        <Box as="ul" mb={3}>
           <li>
             <Link to="cast" state={{ from: goBackLinkHref }}>
               Cast
@@ -51,12 +72,12 @@ const MovieDetails = () => {
               Reviews
             </Link>
           </li>
-        </ul>
-      </div>
+        </Box>
+      </Box>
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
-    </div>
+    </Box>
   );
 };
 

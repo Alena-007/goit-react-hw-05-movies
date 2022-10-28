@@ -1,6 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getMovieCast } from '../API';
+import { getMovieCast } from '../../API';
+import { Box } from 'components/Box';
+import {
+  CastList,
+  CastItem,
+  CastImg,
+  CastNoImg,
+  CastDescr,
+} from './Cast.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -16,31 +24,36 @@ export const Cast = () => {
   const isCast = cast.length === 0 || error;
 
   return (
-    <div>
+    <Box as="section" pt={4}>
       {isCast && <p>We don't have any actors information for this movie</p>}
-      <ul>
+      <CastList>
         {cast.map(actor => (
-          <li key={actor.id}>
-            <div>
+          <CastItem key={actor.id}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              alignContent="center"
+            >
               {actor.profile_path ? (
-                <img
+                <CastImg
                   src={`https://www.themoviedb.org/t/p/w500${actor.profile_path}`}
                   alt={actor.name}
                   width="100"
                 />
               ) : (
-                <div>
+                <CastNoImg>
                   <p>No photo</p>
-                </div>
+                </CastNoImg>
               )}
-              <div>
-                <h2>{actor.name}</h2>
-                <h3>Character: {actor.character}</h3>
-              </div>
-            </div>
-          </li>
+              <CastDescr>
+                <h4>{actor.name}</h4>
+                <p>Character: {actor.character}</p>
+              </CastDescr>
+            </Box>
+          </CastItem>
         ))}
-      </ul>
-    </div>
+      </CastList>
+    </Box>
   );
 };

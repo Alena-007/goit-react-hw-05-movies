@@ -1,30 +1,21 @@
 import { Suspense } from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import { Outlet } from 'react-router-dom';
+import { StyledLink, Header } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
-    <div>
-      <header>
+    <main>
+      <Header>
         <nav>
           <StyledLink to="/" end>
             Home
           </StyledLink>
           <StyledLink to="/movies">Movies</StyledLink>
         </nav>
-      </header>
+      </Header>
       <Suspense fallback={null}>
         <Outlet />
       </Suspense>
-    </div>
+    </main>
   );
 };
-
-const StyledLink = styled(NavLink)`
-  color: black;
-
-  &.active {
-    color: white;
-    background-color: orangered;
-  }
-`;

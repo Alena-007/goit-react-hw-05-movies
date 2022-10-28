@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getSearchMovies } from 'API';
-import { Searchbar } from 'components/Searchbar';
-import { MoviesList } from 'components/MoviesList';
+import { Searchbar } from 'components/Searchbar/Searchbar';
+import { MoviesList } from 'components/MoviesList/MoviesList';
+import { Box } from 'components/Box';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -37,13 +38,12 @@ const Movies = () => {
   };
 
   return (
-    <main>
-      <h1>Movies page</h1>
+    <Box width="1200px" ml="auto" mr="auto" as="main">
       <Searchbar onSubmit={handleFormSubmit} value={request} />
       {error && toast.error(error)}
       {movies.length > 0 && <MoviesList movies={movies} />}
       <ToastContainer autoClose={3000} theme="colored" />
-    </main>
+    </Box>
   );
 };
 

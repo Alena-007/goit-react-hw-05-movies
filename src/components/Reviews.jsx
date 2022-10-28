@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieReviews } from '../API';
+import { Box } from 'components/Box';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -16,18 +17,20 @@ export const Reviews = () => {
   const isReviews = reviews.length === 0 || error;
 
   return (
-    <div>
+    <Box as="section" pt={4}>
       {isReviews && <p>We don't have any reviews for this movie</p>}
       <ul>
         {reviews.map(review => (
           <li key={review.id}>
-            <div>
-              <h3>Author: {review.author}</h3>
-              <p>{review.content}</p>
-            </div>
+            <Box as="h3" mb={3}>
+              Author: {review.author}
+            </Box>
+            <Box as="p" mb={4}>
+              {review.content}
+            </Box>
           </li>
         ))}
       </ul>
-    </div>
+    </Box>
   );
 };
